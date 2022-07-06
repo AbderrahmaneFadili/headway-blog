@@ -27,8 +27,12 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connect to MongoDB"))
-  .catch((error) => console.log(error));
+  .then(() => {
+    console.log("Connect to MongoDB");
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 //simple route
 app.get("/", (req, res) => {
