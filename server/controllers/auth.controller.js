@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user.model");
 /**
  * Auth Controller
- * Add - Edit - Delete - Get => User data
+ * Add - Edit => User data
  */
 
 class AuthController {
@@ -62,6 +62,7 @@ class AuthController {
           });
 
           return response.status(200).send({
+            userId: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
             user_name: user.user_name,

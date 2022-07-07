@@ -12,7 +12,7 @@ const verifyToken = (request, response, next) => {
     });
   }
 
-  jwt.token(token, config.secret, (error, decoded) => {
+  jwt.verify(token, config.secret, (error, decoded) => {
     if (error) {
       return response.status(401).send({
         message: "Unauthorized",
