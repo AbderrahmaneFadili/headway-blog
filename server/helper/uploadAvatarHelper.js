@@ -1,5 +1,4 @@
 const multer = require("multer");
-console.log(multer);
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, callback) => {

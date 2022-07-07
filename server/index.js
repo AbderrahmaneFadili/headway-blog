@@ -41,6 +41,9 @@ app.get("/", (req, res) => {
   });
 });
 
+//Set up auth routes
+require("./routes").authRoute(app);
+
 //set port & listen to requests
 const PORT = process.env.PORT || 8080;
 
