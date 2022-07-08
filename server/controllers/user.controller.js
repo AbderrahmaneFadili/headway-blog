@@ -1,11 +1,36 @@
 const User = require("../models/user.model");
+const fs = require("fs");
 
 class UserController {
   /**
    * upload avatar action
-   * HTTP : POST
+   * HTTP : PUT
    */
-  uploadAvatar = (request, response) => {};
+  uploadAvatar = async (request, response) => {
+    let userId = request.params.id;
+    let avatar = request.file;
+
+    console.log("///// /////");
+    console.log("userId : ", userId);
+    console.log("avatar :", avatar);
+
+    try {
+      let user = await User.findById(userId);
+      if (fs.existsSync(`./${user.avatar}`)) {
+        fs.unlinkSync(`./${user.avatar}`);
+      }
+
+      await User.updateOne({ _id: user._id }, { avatar: avatar.path });
+
+      return response.status(200).send({
+        message: "Avatar is saved !",
+      });
+    } catch (error) {
+      return response.status(500).send({
+        message: error.message,
+      });
+    }
+  };
 
   /**
    * current user

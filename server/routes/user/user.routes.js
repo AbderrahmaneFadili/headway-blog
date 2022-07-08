@@ -1,6 +1,7 @@
 const { authJwt, verifySignup } = require("../../middlewares");
 const UserController = require("../../controllers/user.controller");
 const router = require("express").Router();
+const uploadAvatarHelper = require("../../helper/uploadAvatarHelper");
 
 module.exports = (app) => {
   //use header middleware
@@ -12,8 +13,15 @@ module.exports = (app) => {
     next();
   });
 
-  //POST : register
+  //GET : get current
   router.get("/current/:id", [authJwt.verifyToken], UserController.currentUser);
 
+  //GET :
+  router.put(
+    "/upload/avatar/:id",
+    [authJwt.verifyToken],
+    uploadAvatarHelper.upload.single("avatar"),
+    UserController.uploadAvatar,
+  );
   app.use("/user", router);
 };
