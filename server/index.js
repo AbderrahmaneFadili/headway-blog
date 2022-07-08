@@ -41,6 +41,9 @@ app.get("/", (req, res) => {
   });
 });
 
+//set up the uploads endpoint
+app.use("/uploads/avatars/", express.static("uploads/avatars/"));
+
 //Set up auth routes
 require("./routes").authRoute(app);
 //Set up user routes

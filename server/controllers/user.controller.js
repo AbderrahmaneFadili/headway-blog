@@ -9,11 +9,6 @@ class UserController {
   uploadAvatar = async (request, response) => {
     let userId = request.params.id;
     let avatar = request.file;
-
-    console.log("///// /////");
-    console.log("userId : ", userId);
-    console.log("avatar :", avatar);
-
     try {
       let user = await User.findById(userId);
       if (fs.existsSync(`./${user.avatar}`)) {
